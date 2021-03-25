@@ -7,4 +7,7 @@ def show_all_quiz(request):
     return render(request, 'polls/show_all_quiz.html', {'quizzes': quizzes})
 def show_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, pk=quiz_id)
-    return render(request, 'polls/show_quiz.html', {'quiz': quiz, 'quiz_id': quiz_id})
+    questions = Question.objects.filter(quiz_id=quiz_id)
+    return render(request, 'polls/show_quiz.html', {'quiz': quiz,
+                                                    'quiz_id': quiz_id,
+                                                    'questions': questions})

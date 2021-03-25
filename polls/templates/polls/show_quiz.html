@@ -1,2 +1,7 @@
 <h1>{{ quiz.title }}</h1>
 <h2>{{ quiz.description }}</h2>
+<ul>
+    {% for q in questions %}
+        <li>{{ q.content }}</li>
+    {% endfor %}
+</ul>
