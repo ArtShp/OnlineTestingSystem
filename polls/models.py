@@ -12,6 +12,16 @@ class Subject(models.Model):
     subject_name = models.CharField(verbose_name='Предмет(ы)', max_length=50, blank=False)
 
 
+class Student(models.Model):
+    name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
+    surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
+    # patronymic = father name
+    patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=False)
+    # photo = models.ImageField()
+    class_number = models.CharField(verbose_name='Номер класса', max_length=2, blank=False)
+    class_letter = models.CharField(verbose_name='Буква класса', max_length=2, blank=False)
+
+
 class Teacher(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
     surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
@@ -21,14 +31,12 @@ class Teacher(models.Model):
     subjects = models.ManyToManyField(Subject, verbose_name='Предмет(ы)')
 
 
-class Student(models.Model):
+class Admin(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
     surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
     # patronymic = father name
     patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=False)
     # photo = models.ImageField()
-    class_number = models.CharField(verbose_name='Номер класса', max_length=2, blank=False)
-    class_letter = models.CharField(verbose_name='Буква класса', max_length=2, blank=False)
 
 
 class Quiz(models.Model):
