@@ -2,6 +2,12 @@
 <h2>{{ quiz.description }}</h2>
 <ul>
     {% for q in questions %}
-        <li>{{ q.content }}</li>
+        <li>{{ q.content }}
+            <ul>
+                {% for a in answers %}
+                    <li>{{ a.content }}</li>
+                {% endfor %}
+            </ul>
+        </li>
     {% endfor %}
 </ul>

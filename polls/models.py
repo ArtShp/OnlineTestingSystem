@@ -43,10 +43,10 @@ class Quiz(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, blank=False)
     pub_date = models.DateTimeField(verbose_name='Дата публикации', default=timezone.now)
     description = models.CharField(verbose_name='Описание', max_length=200, blank=True)
-    category = models.ForeignKey(Category, verbose_name='Категория')
+    # category = models.ForeignKey(Category, verbose_name='Категория')
     # Доработать: создателем может быть не только учитель, надо это как-то наследовать
-    creator = models.ForeignKey(Teacher, verbose_name='Создатель')
-    subjects = creator.subjects
+    # creator = models.ForeignKey(Teacher, verbose_name='Создатель')
+    # subjects = creator.subjects
     # Доработать: должно работать иерархическим списком
     students = models.ManyToManyField(Student, verbose_name='Ученик(и)')
 
@@ -77,14 +77,14 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, verbose_name='Тест', on_delete=models.CASCADE)
     content = models.CharField(verbose_name='Вопрос', max_length=300, blank=False)
-    category = models.ForeignKey(Category, verbose_name='Категория')
+    # category = models.ForeignKey(Category, verbose_name='Категория')
 
     # figure = models.ImageField()
     # tip = models.CharField(max_length=100, blank=True)
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, verbose_name='Вопрос')
+    question = models.ForeignKey(Question, verbose_name='Вопрос', on_delete=models.CASCADE)
     content = models.CharField(verbose_name='Ответ', max_length=50, blank=False)
     # Доработать: могут ввести несколько правильных ответов
     is_correct = models.BooleanField(verbose_name='Ответ правильный?')
