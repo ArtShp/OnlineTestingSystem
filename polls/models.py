@@ -48,7 +48,7 @@ class Quiz(models.Model):
     # creator = models.ForeignKey(Teacher, verbose_name='Создатель')
     # subjects = creator.subjects
     # Доработать: должно работать иерархическим списком
-    students = models.ManyToManyField(Student, verbose_name='Ученик(и)')
+    #students = models.ManyToManyField(Student, verbose_name='Ученик(и)')
 
     # figure = models.ImageField()
     # type = models.CharField(max_length=50, blank=True)
