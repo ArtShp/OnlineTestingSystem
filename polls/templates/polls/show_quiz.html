@@ -5,7 +5,9 @@
         <li>{{ q.content }}
             <ul>
                 {% for a in answers %}
-                    <li>{{ a.content }}</li>
+                    {% if q.id == a.question_id %}
+                        <li>{{ a.content }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </li>
