@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Quiz, Question, Answer
+from .forms import _Form
 
 def show_all_quiz(request):
     quizzes = Quiz.objects.order_by('-pub_date')
@@ -13,3 +14,16 @@ def show_quiz(request, quiz_id):
                                                     'quiz_id': quiz_id,
                                                     'questions': questions,
                                                     'answers': answers})
+
+
+def forms_example(request, quiz_id):
+    quiz = get_object_or_404(Quiz, pk=quiz_id)
+    if request.method == 'POST':
+        form = _Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/<int:quiz_id>/')
+    else:
+        form = _Form()
+    return render(request, 'polls/form.html', {'quiz_id': quiz_id,
+                                               'form': form})
