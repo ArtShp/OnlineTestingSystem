@@ -9,3 +9,11 @@ class PersonAdmin(admin.ModelAdmin):
 admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(Answer)
+
+'''
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ('name', 'body', 'post', 'created_on', 'active')
+    list_filter = ('active', 'created_on')
+    search_fields = ('name', 'email', 'body')
+
+'''
