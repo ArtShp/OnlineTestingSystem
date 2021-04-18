@@ -1,15 +1,2 @@
 <h1>{{ quiz.title }}</h1>
 <h2>{{ quiz.description }}</h2>
-<ul>
-    {% for q in questions %}
-        <li>{{ q.content }}
-            <ul>
-                {% for a in answers %}
-                    {% if q.id == a.question_id %}
-                        <li>{{ a.content }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>

@@ -16,17 +16,17 @@ def show_quiz(request, quiz_id):
                                                     'answers': answers})
 
 
-def forms_example(request, quiz_id):
-    quiz = get_object_or_404(Quiz, pk=quiz_id)
+def create_quiz(request):
+    error = ''
     if request.method == 'POST':
-        form = QuizForm(data=request.POST)
+        form = QuizForm(request.POST)
         if form.is_valid():
-            result = form.save(commit=False)
-            result.quiz = quiz
-            result.save()
+            form.save()
+            return redirect('/')
+        else:
+            error = 'Form error'
 
-            return redirect('/<int:quiz_id>/')
-    else:
-        form = QuizForm()
-    return render(request, 'polls/form.html', {'quiz_id': quiz_id,
-                                               'form': form})
+    form = QuizForm()
+
+    return render(request, 'polls/form.html', {'form': form,
+                                               'error': error})
