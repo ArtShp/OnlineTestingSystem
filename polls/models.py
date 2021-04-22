@@ -96,3 +96,10 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class AnsweredQuiz(models.Model):
+    name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
+
+    def __str__(self):
+        return self.name

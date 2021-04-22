@@ -1,17 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, DateTimeInput, NullBooleanSelect
 from django import forms
-from polls.models import Answer, Question, Quiz
-
-'''
-class QuizForm(ModelForm):
-    class Meta:
-        model = 
-'''
-    #name = forms.CharField(max_length=25, required=True)
-
-    #questions = Question.objects.filter(quiz_id=quiz_id)
-    #questions = Question.objects.all()
-
+from polls.models import Answer, Question, Quiz, AnsweredQuiz
 
 class CreateQuizForm(ModelForm):
     class Meta:
@@ -32,3 +21,15 @@ class CreateQuizForm(ModelForm):
                 'placeholder': 'Published date'
             })
         }
+
+class QuizForm(ModelForm):
+    class Meta:
+        model = AnsweredQuiz
+        fields = ['name']
+
+        widgets = {
+            'name': TextInput(attrs={
+                'placeholder': 'Name'
+            })
+        }
+
