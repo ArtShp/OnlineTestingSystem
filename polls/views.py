@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Quiz, Question, Answer
-from .forms import QuizForm
+from .forms import CreateQuizForm, QuizForm
 
 def show_all_quiz(request):
     quizzes = Quiz.objects.order_by('-pub_date')
@@ -15,8 +15,22 @@ def show_quiz(request, quiz_id):
                                                     'questions': questions,
                                                     'answers': answers})
 
-
 def create_quiz(request):
+    error = ''
+    if request.method == 'POST':
+        form = CreateQuizForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            error = 'Form error'
+
+    form = CreateQuizForm()
+
+    return render(request, 'polls/create_quiz.html', {'form': form,
+                                                      'error': error})
+
+def start_quiz(request, quiz_id):
     error = ''
     if request.method == 'POST':
         form = QuizForm(request.POST)
@@ -28,5 +42,6 @@ def create_quiz(request):
 
     form = QuizForm()
 
-    return render(request, 'polls/form.html', {'form': form,
-                                               'error': error})
+    return render(request, 'polls/start_quiz.html', {'quiz_id': quiz_id,
+                                                     'form': form,
+                                                     'error': error})

@@ -1,18 +1,19 @@
 from django.forms import ModelForm, TextInput, Textarea, DateTimeInput, NullBooleanSelect
+from django import forms
 from polls.models import Answer, Question, Quiz
 
 '''
-class QuizForm(forms.Form):
-    name = forms.CharField(max_length=25, required=True)
-    price = forms.DecimalField(min_value=0, max_value=10, max_digits=3)
-    author_email = forms.EmailField()
-    feedback = forms.CharField(widget=forms.Textarea)
+class QuizForm(ModelForm):
+    class Meta:
+        model = 
+'''
+    #name = forms.CharField(max_length=25, required=True)
 
     #questions = Question.objects.filter(quiz_id=quiz_id)
-    questions = Question.objects.all()
-'''
+    #questions = Question.objects.all()
 
-class QuizForm(ModelForm):
+
+class CreateQuizForm(ModelForm):
     class Meta:
         model = Quiz
         fields = ['title', 'description', 'random_order', 'pub_date']

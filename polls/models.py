@@ -41,7 +41,6 @@ class Admin(models.Model):
 
 class Quiz(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, blank=False)
-    pub_date = models.DateTimeField(verbose_name='Дата публикации', default=timezone.now)
     description = models.CharField(verbose_name='Описание', max_length=200, blank=True)
     # category = models.ForeignKey(Category, verbose_name='Категория')
     # Доработать: создателем может быть не только учитель, надо это как-то наследовать
@@ -68,10 +67,13 @@ class Quiz(models.Model):
     time_to_do = models.DurationField()
     """
 
+    pub_date = models.DateTimeField(verbose_name='Дата публикации', default=timezone.now)
     random_order = models.BooleanField(verbose_name='Перемешать вопросы')
 
     # 0-instantly, 1-check button after all, 2-after the end
     # show_result_mode = models.DecimalField(max_digits=1, decimal_places=0)
+    def __str__(self):
+        return self.title
 
 
 class Question(models.Model):
@@ -82,9 +84,15 @@ class Question(models.Model):
     # figure = models.ImageField()
     # tip = models.CharField(max_length=100, blank=True)
 
+    def __str__(self):
+        return self.content
+
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, verbose_name='Вопрос', on_delete=models.CASCADE)
     content = models.CharField(verbose_name='Ответ', max_length=50, blank=False)
     # Доработать: могут ввести несколько правильных ответов
     is_correct = models.BooleanField(verbose_name='Ответ правильный?')
+
+    def __str__(self):
+        return self.content

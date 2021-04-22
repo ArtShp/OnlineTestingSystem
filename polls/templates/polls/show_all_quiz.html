@@ -3,4 +3,4 @@
         <li><a href="{{ quiz.id }}">{{ quiz.title }}</a></li>
     {% endfor %}
 </ul>
-<a href="{% url 'create_quiz' %}"><button>Create Quiz</button></a>
+<a href="{% url 'polls:create_quiz' %}">Create Quiz</a>

@@ -1,2 +1,3 @@
 <h1>{{ quiz.title }}</h1>
 <h2>{{ quiz.description }}</h2>
+<a href="{% url 'polls:start_quiz' quiz_id %}">Start test</a>
