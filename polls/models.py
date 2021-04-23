@@ -99,6 +99,7 @@ class Answer(models.Model):
 
 
 class AnsweredQuiz(models.Model):
+    quiz = models.ForeignKey(Quiz, verbose_name='Тест', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
 
     def __str__(self):

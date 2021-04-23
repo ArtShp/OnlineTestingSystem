@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, AnsweredQuiz
 from .forms import CreateQuizForm, QuizForm
 
 def show_all_quiz(request):
@@ -45,3 +45,8 @@ def start_quiz(request, quiz_id):
     return render(request, 'polls/start_quiz.html', {'quiz_id': quiz_id,
                                                      'form': form,
                                                      'error': error})
+
+def show_answered_quiz(request, quiz_id):
+    a_quizzes = AnsweredQuiz.objects.filter(quiz_id=quiz_id)
+    return render(request, 'polls/show_answered_quiz.html', {'quiz_id': quiz_id,
+                                                             'a_quizzes': a_quizzes})
