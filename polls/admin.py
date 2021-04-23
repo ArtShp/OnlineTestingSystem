@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, AnsweredQuiz
 
 '''
 class PersonAdmin(admin.ModelAdmin):
@@ -9,6 +9,7 @@ class PersonAdmin(admin.ModelAdmin):
 admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(Answer)
+admin.site.register(AnsweredQuiz)
 
 '''
 class QuizAdmin(admin.ModelAdmin):
