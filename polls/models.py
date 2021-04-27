@@ -12,6 +12,12 @@ class Subject(models.Model):
     subject_name = models.CharField(verbose_name='Предмет(ы)', max_length=50, blank=False)
 
 
+class Classes(models.Model):
+    level = models.IntegerField(verbose_name='Уровень', blank=False)
+    letter = models.CharField(verbose_name='Буква', blank=False)
+    subjects = models.ManyToManyField(Subject, verbose_name='Предмет(ы)', blank=False)
+
+
 class Student(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
     surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
