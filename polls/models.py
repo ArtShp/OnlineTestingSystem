@@ -27,7 +27,7 @@ class Student(models.Model):
     email = models.EmailField(verbose_name='Email', max_length=100, blank=True, null=True)
     password = models.CharField(verbose_name='Пароль', max_length=50, default='1337', blank=False)
     # photo = models.ImageField()
-    learn_class = models.ForeignKey(Classes, verbose_name='Класс', on_delete=models.CASCADE)
+    learn_class = models.ForeignKey(Classes, verbose_name='Класс', default=' ', on_delete=models.CASCADE)
 
 
 class Teacher(models.Model):
@@ -89,7 +89,7 @@ class Quiz(models.Model):
 
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, verbose_name='Тест', on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, verbose_name='Тест', default=' ', on_delete=models.CASCADE)
     content = models.CharField(verbose_name='Вопрос', max_length=300, default=' ', blank=False)
     # category = models.ForeignKey(Category, verbose_name='Категория')
 
@@ -101,7 +101,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, verbose_name='Вопрос', on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, verbose_name='Вопрос', default=' ', on_delete=models.CASCADE)
     content = models.CharField(verbose_name='Ответ', max_length=50, default=' ', blank=False)
     # Доработать: могут ввести несколько правильных ответов
     is_correct = models.BooleanField(verbose_name='Ответ правильный?', default=False)
@@ -111,7 +111,7 @@ class Answer(models.Model):
 
 
 class AnsweredQuiz(models.Model):
-    quiz = models.ForeignKey(Quiz, verbose_name='Тест', on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, verbose_name='Тест', default=' ', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='Имя', max_length=50, default=' ', blank=False)
 
     def __str__(self):
