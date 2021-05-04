@@ -2,10 +2,9 @@ from django.db import models
 from django.utils import timezone
 
 # HELP TEXT
-# On_delete
 
 class Category(models.Model):
-    category_name = models.CharField(verbose_name='Категория', max_length=100, blank=True)
+    category_name = models.CharField(verbose_name='Категория', max_length=100, blank=True, null=True)
 
 
 class Subject(models.Model):
@@ -14,7 +13,7 @@ class Subject(models.Model):
 
 class Classes(models.Model):
     level = models.IntegerField(verbose_name='Уровень', blank=False)
-    letter = models.CharField(verbose_name='Буква', blank=False)
+    letter = models.CharField(verbose_name='Буква', max_length=1, blank=False)
     subjects = models.ManyToManyField(Subject, verbose_name='Предмет(ы)', blank=False)
 
 
@@ -22,20 +21,25 @@ class Student(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
     surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
     # patronymic = father name
-    patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=False)
+    patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=True, null=True)
+    phone = models.CharField(verbose_name='Номер телефона', max_length=50, blank=True, null=True)
+    email = models.EmailField(verbose_name='Email', max_length=100, blank=True, null=True)
+    password = models.CharField(verbose_name='Пароль', max_length=50, blank=False)
     # photo = models.ImageField()
-    class_number = models.CharField(verbose_name='Номер класса', max_length=2, blank=False)
-    class_letter = models.CharField(verbose_name='Буква класса', max_length=2, blank=False)
+    learn_class = models.ForeignKey(Classes, verbose_name='Класс', on_delete=models.CASCADE)
 
 
 class Teacher(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
     surname = models.CharField(verbose_name='Фамилия', max_length=50, blank=False)
     # patronymic = father name
-    patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=False)
+    patronymic = models.CharField(verbose_name='Отчество', max_length=50, blank=True, null=True)
+    phone = models.CharField(verbose_name='Номер телефона', max_length=50, blank=True, null=True)
+    email = models.EmailField(verbose_name='Email', max_length=100, blank=True, null=True)
+    password = models.CharField(verbose_name='Пароль', max_length=50, blank=False)
     # photo = models.ImageField()
     subjects = models.ManyToManyField(Subject, verbose_name='Предмет(ы)')
-
+    teach_class = models.ManyToManyField(Classes, verbose_name='Класс(ы)')
 
 class Admin(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=50, blank=False)
@@ -47,7 +51,7 @@ class Admin(models.Model):
 
 class Quiz(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, blank=False)
-    description = models.CharField(verbose_name='Описание', max_length=200, blank=True)
+    description = models.CharField(verbose_name='Описание', max_length=200, blank=True, null=True)
     # category = models.ForeignKey(Category, verbose_name='Категория')
     # Доработать: создателем может быть не только учитель, надо это как-то наследовать
     # creator = models.ForeignKey(Teacher, verbose_name='Создатель')
@@ -56,7 +60,7 @@ class Quiz(models.Model):
     #students = models.ManyToManyField(Student, verbose_name='Ученик(и)')
 
     # figure = models.ImageField()
-    # type = models.CharField(max_length=50, blank=True)
+    # type = models.CharField(max_length=50, blank=True, null=True)
 
     # attempts_limited = models.BooleanField()
     # max 999 attempts
@@ -88,7 +92,7 @@ class Question(models.Model):
     # category = models.ForeignKey(Category, verbose_name='Категория')
 
     # figure = models.ImageField()
-    # tip = models.CharField(max_length=100, blank=True)
+    # tip = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.content
