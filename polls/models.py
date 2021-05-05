@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 # HELP TEXT - в админке под полем ввода находится подсказка.
+# class Meta - инфа, которая будет показываться в админке
 '''
 class Category(models.Model):
     category_name = models.CharField(verbose_name='Категория', max_length=100, blank=True, null=True)
